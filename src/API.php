@@ -41,6 +41,8 @@ class API
             return ['success' => false, 'message' => 'SMS Auth Token is not set'];
         } elseif (empty(env('SMS_BASE_URL'))) {
             return ['success' => false, 'message' => 'SMS Base URL is not set'];
+        } elseif (empty(env('SMS_SENDER_ID'))) {
+            return ['success' => false, 'message' => 'SMS Sender ID is not set'];
         }
 
 
@@ -56,7 +58,7 @@ class API
             ->post(env('SMS_BASE_URL'), [
                 'phone_number' => $changeNumberFormat,
                 'message' => $message,
-                'sender_id' => 'VSsms'
+                'sender_id' => env('SMS_SENDER_ID')
             ]);
     }
 }
