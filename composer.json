@@ -1,0 +1,19 @@
+{
+    "name": "jimmyjetter/xchange_connect",
+    "description": "Connect to Korba Xchange",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "authors": [
+        {
+            "name": "jimmyjetter27",
+            "email": "jimmyjetter27@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
