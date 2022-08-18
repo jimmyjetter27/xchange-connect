@@ -59,4 +59,9 @@ class XChange extends API
         return parent::hitting_exchange(
             'collect/', $data, 'post', $this->getHmac($data));
     }
+
+    public function ovaBalance()
+    {
+        return parent::hitting_exchange('get_ova_balance/', [], 'post', $this->getHmac([]));
+    }
 }
