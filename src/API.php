@@ -9,6 +9,11 @@ class API
 {
     protected function hitting_exchange($endpoint, $payload, $method_type, $authorization, $timeout = 0, $connection_timeout = 300)
     {
+        if (empty(env('EXCHANGE_URL')))
+        {
+            return ['success' => false, 'message' => 'Exchange URL is not set'];
+        }
+
         $url = env('EXCHANGE_URL').'/'.$endpoint;
         $proxy_url = env('EXCHANGE_PROXY_URL');
         $payload = array_merge($payload, ['client_id' => env('EXCHANGE_DEFAULT_CLIENT_ID')]);
