@@ -131,4 +131,21 @@ class KorbaHelper
     public static function verifyNumber($number) {
         return preg_match("/^[0-9]*$/", $number) ? true : false;
     }
+
+
+    public static function checkNetworkName(array $response)
+    {
+        if (isset($response['status']) && $response['status'] == 'OK') {
+            if ($response['network'] == 'Vodafone') {
+                $response['network'] = 'VOD';
+            } else if ($response['network'] == 'AirtelTigo') {
+                $response['network'] = 'AIR';
+            }  else {
+                $response['network'] = 'UNKNOWN';
+            }
+
+            return $response;
+        }
+        return $response;
+    }
 }

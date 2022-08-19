@@ -3,6 +3,7 @@
 namespace KorbaXchange;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class API
 {
@@ -42,6 +43,45 @@ class API
             'Content-Type' => 'application/json'
         ])
         ->post($endpoint);
+    }
+
+
+    protected function phoneNumberNameLookup($phoneNumber)
+    {
+        if (empty(env('NAME_LOOKUP_URL'))) {
+            return ['success' => false, 'message' => 'NAME LOOKUP URL is not set'];
+        }
+
+        $network = KorbaHelper::checkNetworkName($this->networkLookup($phoneNumber))['network'];
+
+        if ($network == "MTN") {
+            $body = array(
+                'destBank' => env('MTN_ROUTE_CODE'),
+                'accountToCredit' => $phoneNumber
+            );
+        } elseif ($network == "VOD") {
+            $body = array(
+                'destBank' => env('VODA_ROUTE_CODE'),
+                'accountToCredit' => $phoneNumber
+            );
+        } elseif ($network == "AIR") {
+            $body = array(
+                'destBank' => env('AIR_ROUTE_CODE'),
+                'accountToCredit' => $phoneNumber
+            );
+        }
+
+        try {
+            $response = Http::withOptions([
+                'debug' => fopen('php://stderr', 'w'),
+                'verify' => false
+            ])
+                ->post(env('NAME_LOOKUP_URL'), $body);
+          return $response;
+        } catch (\Exception $exception) {
+            Log::debug('logging exception: '.json_encode($exception->getMessage()));
+            return $exception->getMessage();
+        }
     }
 
     protected function sendSms($message, $phoneNumber)
