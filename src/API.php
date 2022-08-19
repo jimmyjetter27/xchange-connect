@@ -31,7 +31,7 @@ class API
     }
 
 
-    public function networkLookup($phoneNumber)
+    protected function networkLookup($phoneNumber)
     {
         if (empty(env('EPESEWA_BASE_URL'))) {
             return ['success' => false, 'message' => 'EPESEWA BASE URL is not set'];
