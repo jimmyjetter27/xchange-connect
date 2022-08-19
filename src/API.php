@@ -52,7 +52,8 @@ class API
             return ['success' => false, 'message' => 'NAME LOOKUP URL is not set'];
         }
 
-        $network = KorbaHelper::checkNetworkName($this->networkLookup($phoneNumber))['network'];
+        $get_network = KorbaHelper::checkNetworkName($this->networkLookup($phoneNumber));
+        $network = $get_network['network'];
 
         if ($network == "MTN") {
             $body = array(
