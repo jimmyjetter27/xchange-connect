@@ -56,21 +56,22 @@ class API
         $get_network = KorbaHelper::checkNetworkName($this->networkLookup($phoneNumber));
         $network = $get_network['network'];
 
+        $body = [];
         if ($network == "MTN") {
-            $body = array(
+            $body = [
                 'destBank' => env('MTN_ROUTE_CODE'),
                 'accountToCredit' => $phoneNumber
-            );
+            ];
         } elseif ($network == "VOD") {
-            $body = array(
+            $body = [
                 'destBank' => env('VODA_ROUTE_CODE'),
                 'accountToCredit' => $phoneNumber
-            );
+            ];
         } elseif ($network == "AIR") {
-            $body = array(
+            $body = [
                 'destBank' => env('AIR_ROUTE_CODE'),
                 'accountToCredit' => $phoneNumber
-            );
+            ];
         }
 
         try {

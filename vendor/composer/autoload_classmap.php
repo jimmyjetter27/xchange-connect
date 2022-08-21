@@ -7,4 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'KorbaXchange\\API' => $baseDir . '/src/API.php',
+    'KorbaXchange\\KorbaHelper' => $baseDir . '/src/KorbaHelper.php',
+    'KorbaXchange\\XChange' => $baseDir . '/src/XChange.php',
 );

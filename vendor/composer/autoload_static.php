@@ -6,29 +6,16 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit1ce8b561f23a5e9c6e980547df88fec0
 {
-    public static $prefixLengthsPsr4 = array (
-        'J' => 
-        array (
-            'Jimmyjetter\\XchangeConnect\\' => 27,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Jimmyjetter\\XchangeConnect\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
-    );
-
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'KorbaXchange\\API' => __DIR__ . '/../..' . '/src/API.php',
+        'KorbaXchange\\KorbaHelper' => __DIR__ . '/../..' . '/src/KorbaHelper.php',
+        'KorbaXchange\\XChange' => __DIR__ . '/../..' . '/src/XChange.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1ce8b561f23a5e9c6e980547df88fec0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1ce8b561f23a5e9c6e980547df88fec0::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit1ce8b561f23a5e9c6e980547df88fec0::$classMap;
 
         }, null, ClassLoader::class);
