@@ -140,7 +140,9 @@ class KorbaHelper
                 $response['network'] = 'VOD';
             } else if ($response['network'] == 'AirtelTigo') {
                 $response['network'] = 'AIR';
-            }  else {
+            }  else if ($response['network'] == 'MTN') {
+                $response['network'] = 'MTN';
+            } else {
                 $response['network'] = 'UNKNOWN';
             }
 
