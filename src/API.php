@@ -80,7 +80,7 @@ class API
                 'verify' => false
             ])
                 ->post(env('NAME_LOOKUP_URL'), $body);
-          return $response;
+          return json_decode($response, 2);
         } catch (\Exception $exception) {
             Log::debug('logging exception: '.json_encode($exception->getMessage()));
             return $exception->getMessage();
