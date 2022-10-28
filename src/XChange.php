@@ -121,4 +121,36 @@ class XChange extends API
         $this->add_optional_data($data, $opt_data);
         return parent::hitting_exchange('topup/', $data, 'post', $this->getHmac($data));
     }
+
+
+    public function airteltigo_purchase(
+        $customer_number, $transaction_id, $product_id, $amount, $callback_url,
+        $description = null, $payer_name = null, $extra_info = null)
+    {
+        $data = $this->internet_product_data(
+            $customer_number, $transaction_id, $product_id, $amount, $callback_url,
+            $description, $payer_name, $extra_info);
+        return parent::hitting_exchange('airteltigo_data_topup/', $data, 'post', $this->getHmac($data));
+    }
+
+
+    private function internet_product_data(
+        $customer_number, $transaction_id, $product_id, $amount, $callback_url,
+        $description = null, $payer_name = null, $extra_info = null)
+    {
+        $data = [
+            'customer_number' => $customer_number,
+            'transaction_id' => $transaction_id,
+            'product_id' => $product_id,
+            'amount' => $amount,
+            'callback_url' => $callback_url
+        ];
+        $opt_data = [
+            'description' => $description,
+            'payer_name' => $payer_name,
+            'extra_info' => $extra_info
+        ];
+        $this->add_optional_data($data, $opt_data);
+        return $data;
+    }
 }
