@@ -151,7 +151,8 @@ class XChange extends API
         $this->add_optional_data($data, $opt_data);
         Log::info('GLO_DATA_PURCHASE_PAYLOAD: '.json_encode($data));
 
-        return parent::hitting_exchange('glo_data_purchase/', $data, 'post', $this->getHmac($data));
+//        return parent::hitting_exchange('glo_data_purchase/', $data, 'post', $this->getHmac($data));
+        return parent::hitting_exchange('new_glo_data_purchase/', $data, 'post', $this->getHmac($data));
     }
 
     private function internet_product_data(
