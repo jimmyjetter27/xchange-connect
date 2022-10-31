@@ -1,6 +1,8 @@
 <?php
 
 namespace KorbaXchange;
+use Illuminate\Support\Facades\Log;
+
 class XChange extends API
 {
     private function getHmac($data)
@@ -118,6 +120,7 @@ class XChange extends API
             'payer_name' => $payer_name,
             'extra_info' => $extra_info
         ];
+        Log::info('AIRTIME_TOPUP_PAYLOAD: '.json_encode($data));
         $this->add_optional_data($data, $opt_data);
         return parent::hitting_exchange('topup/', $data, 'post', $this->getHmac($data));
     }
@@ -130,6 +133,7 @@ class XChange extends API
         $data = $this->internet_product_data(
             $customer_number, $transaction_id, $product_id, $amount, $callback_url,
             $description, $payer_name, $extra_info);
+        Log::info('AIRTELTIGO_DATA_PURCHASE_PAYLOAD: '.json_encode($data));
         return parent::hitting_exchange('airteltigo_data_topup/', $data, 'post', $this->getHmac($data));
     }
 
@@ -145,6 +149,7 @@ class XChange extends API
         ];
         $opt_data = ['description' => $description];
         $this->add_optional_data($data, $opt_data);
+        Log::info('GLO_DATA_PURCHASE_PAYLOAD: '.json_encode($data));
 
         return parent::hitting_exchange('glo_data_purchase/', $data, 'post', $this->getHmac($data));
     }
