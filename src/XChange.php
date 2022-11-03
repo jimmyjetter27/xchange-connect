@@ -180,6 +180,6 @@ class XChange extends API
         $data = [
             'transaction_id' => $transaction_id
         ];
-        return $this->call('transaction_status/', $data);
+        return parent::hitting_exchange('transaction_status/', $data, 'post', $this->getHmac($data));
     }
 }
