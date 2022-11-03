@@ -174,4 +174,12 @@ class XChange extends API
         $this->add_optional_data($data, $opt_data);
         return $data;
     }
+
+    public function transaction_status($transaction_id)
+    {
+        $data = [
+            'transaction_id' => $transaction_id
+        ];
+        return $this->call('transaction_status/', $data);
+    }
 }
