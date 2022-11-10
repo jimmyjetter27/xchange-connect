@@ -138,7 +138,8 @@ class XChange extends API
     }
 
 
-    public function glo_purchase($customer_number, $bundle_id, $amount, $transaction_id, $callback_url, $description = null)
+    public function glo_purchase($customer_number, $bundle_id, $amount, $transaction_id,
+                                 $callback_url, $description = null, $payer_name = null, $extra_info = null)
     {
         $data = [
             'customer_number' => $customer_number,
@@ -147,7 +148,11 @@ class XChange extends API
             'transaction_id' => $transaction_id,
             'callback_url' => $callback_url
         ];
-        $opt_data = ['description' => $description];
+       $opt_data = [
+            'description' => $description,
+            'payer_name' => $payer_name,
+            'extra_info' => $extra_info
+        ];
         $this->add_optional_data($data, $opt_data);
         Log::info('GLO_DATA_PURCHASE_PAYLOAD: '.json_encode($data));
 
