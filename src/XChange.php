@@ -180,6 +180,12 @@ class XChange extends API
         return $data;
     }
 
+
+    public function new_glo_types()
+    {
+        return parent::hitting_exchange('new_glo_data_get_bundle_types/', [], 'post', []);
+    }
+
     public function transaction_status($transaction_id)
     {
         $data = [
