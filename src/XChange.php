@@ -99,6 +99,7 @@ class XChange extends API
             'payer_name' => $payer_name,
             'payer_mobile' => $payer_mobile
         ];
+        Log::info('DISBURSEMENT_PAYLOAD: '.json_encode($data));
         $this->add_optional_data($data, $opt_data);
         return parent::hitting_exchange('disburse/', $data, 'post', $this->getHmac($data));
     }
@@ -184,6 +185,14 @@ class XChange extends API
     public function new_glo_types()
     {
         return parent::hitting_exchange('new_glo_data_get_bundle_types/', [], 'post', []);
+    }
+
+
+    public function airteltigo_bundles($filter = null)
+    {
+        return parent::hitting_exchange('get_airteltigo_internet_bundles/', [], 'post', []);
+        $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
+        return $result;
     }
 
     public function transaction_status($transaction_id)
