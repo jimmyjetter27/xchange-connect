@@ -47,6 +47,28 @@ class API
     }
 
 
+    public function nameNetworkLookup($phone_number)
+    {
+        $endpoint = "https://fxdtjd96u7.execute-api.eu-west-1.amazonaws.com/dev/".$phone_number;
+        $response = Http::withoutVerifying()
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ])
+            ->get($endpoint);
+
+        $data = json_decode($response, true);
+        if (isset($data['success']) && $data['success'] == true) {
+            if ($data['network'] == 'Vodafone') {
+                $data['network'] = 'VOD';
+            } else if ($data['network'] == 'AirtelTigo') {
+                $data['network'] = 'AIR';
+            }
+            return $data;
+        }
+        return $data;
+    }
+
+
     protected function phoneNumberNameLookup($phoneNumber)
     {
         if (empty(env('NAME_LOOKUP_URL'))) {
