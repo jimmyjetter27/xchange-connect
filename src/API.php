@@ -23,7 +23,9 @@ class API
         ])
             ->withOptions([
                 // add proxy if proxy url is set
-                'proxy' => $proxy_url ?: null
+                'proxy' => $proxy_url ?: null,
+                'debug' => fopen('php://stderr', 'w'),
+                'verify' => false
             ])
             ->timeout($timeout)
             ->connectTimeout($connection_timeout)
